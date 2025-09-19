@@ -1,6 +1,7 @@
 import os
 import sys
 from pkg.config_generator import load_nodes, generate_keypair, assign_ips, generate_config_files
+from pkg.node import Node
 
 def add_generate_subparser(subparsers):
     parser = subparsers.add_parser(
@@ -31,7 +32,6 @@ def add_generate_subparser(subparsers):
     parser.set_defaults(func=run_generate)
     return parser
 
-
 def run_generate(args):
     # Validate input file
     if not os.path.isfile(args.input):
@@ -43,8 +43,8 @@ def run_generate(args):
 
     for node in nodes:
         private_key, public_key = generate_keypair()
-        node['private_key'] = private_key
-        node['public_key'] = public_key
+        node.private_key = private_key
+        node.public_key = public_key
 
     generate_config_files(nodes, args.output, args.subnet)
     print(f"[+] Configuration files generated in {args.output}")
