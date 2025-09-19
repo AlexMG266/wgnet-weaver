@@ -19,12 +19,6 @@ def add_generate_subparser(subparsers):
         help='Directory where generated .conf files for each node will be saved.'
     )
     parser.add_argument(
-        '--topology', '-t',
-        choices=['full', 'partial'],
-        default='full',
-        help='Network topology type. Default: full mesh.'
-    )
-    parser.add_argument(
         '--subnet', '-s',
         default='10.10.0.0/16',
         help='Internal subnet range for assigning node IPs. Default: 10.10.0.0/16.'

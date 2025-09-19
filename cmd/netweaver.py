@@ -3,7 +3,7 @@
 # @author: alex-mosquera-gundin <alex.mosquera@udc.es>
 
 import argparse
-from cmd.subcmd.generate import add_generate_subparser
+from cmd.subcmd import generate, add_node
 from pkg.__version__ import __version__
 
 # usage:
@@ -17,7 +17,8 @@ def main():
 
     parser.add_argument('--version', action='version', version=f'NetWeaver {__version__}')
     subparsers = parser.add_subparsers(dest='command', required=True)
-    add_generate_subparser(subparsers)
+    generate.add_generate_subparser(subparsers)
+    add_node.add_generator_subparser(subparsers)
 
     args = parser.parse_args()
     args.func(args)

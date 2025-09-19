@@ -1,11 +1,14 @@
+import uuid
 
 class Node:
-    def __init__(self, name, public_ip, private_ip=None, port=51820, allowed_ips=None):
+    def __init__(self, name, public_ip, private_ip=None, port=51820, allowed_ips=None, peers=None):
+        self._id = str(uuid.uuid4())
         self._name = name
         self._public_ip = public_ip
         self.ip = private_ip
         self._port = port
         self._allowed_ips = allowed_ips or []
+        self._peers = peers # if none, full mesh in that node
 
     @property
     def name(self):
@@ -54,6 +57,13 @@ class Node:
     def remove_allowed_ip(self, ip):
         if ip in self._allowed_ips:
             self._allowed_ips.remove(ip)
+
+    def clear_allowed_ips(self):
+        self._allowed_ips = []
+
+    @property
+    def peers(self):
+        return self._peers
 
     def to_dict(self):
         return {
