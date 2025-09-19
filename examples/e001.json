@@ -1,0 +1,19 @@
+{
+  "nodes": [
+    {"name": "router1", "type": "router", "public_ip": "203.0.113.1", "peers": ["router2", "vpn_gateway1", "server1"]},
+    {"name": "router2", "type": "router", "public_ip": "203.0.113.2", "peers": ["router1", "router3", "server2"]},
+    {"name": "router3", "type": "router", "public_ip": "203.0.113.3", "peers": ["router2", "vpn_gateway2", "server3"]},
+    {"name": "vpn_gateway1", "type": "vpn_gateway", "public_ip": "203.0.113.4", "peers": ["router1", "client1", "client2"]},
+    {"name": "vpn_gateway2", "type": "vpn_gateway", "public_ip": "203.0.113.5", "peers": ["router3", "client3", "client4"]},
+    {"name": "server1", "type": "server", "public_ip": "203.0.113.6", "peers": ["router1", "server2"]},
+    {"name": "server2", "type": "server", "public_ip": "203.0.113.7", "peers": ["router2", "server1", "server3"]},
+    {"name": "server3", "type": "server", "public_ip": "203.0.113.8", "peers": ["router3", "server2"]},
+    {"name": "client1", "type": "client", "public_ip": "203.0.113.9", "peers": ["vpn_gateway1", "client2"]},
+    {"name": "client2", "type": "client", "public_ip": "203.0.113.10", "peers": ["vpn_gateway1", "client1", "client5"]},
+    {"name": "client3", "type": "client", "public_ip": "203.0.113.11", "peers": ["vpn_gateway2", "client4"]},
+    {"name": "client4", "type": "client", "public_ip": "203.0.113.12", "peers": ["vpn_gateway2", "client3", "client5"]},
+    {"name": "client5", "type": "client", "public_ip": "203.0.113.13", "peers": ["client2", "client4"]},
+    {"name": "server4", "type": "server", "public_ip": "203.0.113.14", "peers": ["router2", "router3"]},
+    {"name": "server5", "type": "server", "public_ip": "203.0.113.15", "peers": ["router1", "router3"]}
+  ]
+}

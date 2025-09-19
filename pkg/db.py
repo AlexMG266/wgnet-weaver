@@ -17,6 +17,7 @@ class VPNNetwork:
         CREATE TABLE IF NOT EXISTS nodes (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT UNIQUE NOT NULL,
+            type TEXT NOT NULL DEFAULT 'node',  -- nuevo campo type
             public_ip TEXT NOT NULL,
             private_ip TEXT,
             allowed_ips TEXT,
@@ -38,9 +39,9 @@ class VPNNetwork:
     def add_node(self, node: Node):
         cur = self.conn.cursor()
         cur.execute("""
-        INSERT OR IGNORE INTO nodes (name, public_ip, private_ip, port)
-        VALUES (?, ?, ?, ?)
-        """, (node.name, node.public_ip, node.ip, node.port))
+        INSERT OR IGNORE INTO nodes (name, type, public_ip, private_ip, port)
+        VALUES (?, ?, ?, ?, ?)
+        """, (node.name, node.type, node.public_ip, node.ip, node.port))
         self.conn.commit()
 
         cur.execute("SELECT id FROM nodes WHERE name=?", (node.name,))
@@ -49,16 +50,19 @@ class VPNNetwork:
 
     def get_nodes(self):
         cur = self.conn.cursor()
-        cur.execute("SELECT id, name, public_ip, private_ip, port FROM nodes")
+        cur.execute("SELECT id, name, type, public_ip, private_ip, port FROM nodes")
         rows = cur.fetchall()
-        return [Node(name=r[1], public_ip=r[2], private_ip=r[3], port=r[4]) for r in rows]
+        return [
+            Node(name=r[1], type=r[2], public_ip=r[3], private_ip=r[4], port=r[5])
+            for r in rows
+        ]
 
     def get_node_by_id(self, node_id):
         cur = self.conn.cursor()
-        cur.execute("SELECT id, name, public_ip, private_ip, port FROM nodes WHERE id=?", (node_id,))
+        cur.execute("SELECT id, name, type, public_ip, private_ip, port FROM nodes WHERE id=?", (node_id,))
         row = cur.fetchone()
         if row:
-            return Node(name=row[1], public_ip=row[2], private_ip=row[3], port=row[4])
+            return Node(name=row[1], type=row[2], public_ip=row[3], private_ip=row[4], port=row[5])
         return None
 
     def add_link(self, node_a_id, node_b_id):
@@ -83,8 +87,18 @@ class VPNNetwork:
             cur.execute("SELECT node_a, node_b FROM links")
 
         rows = cur.fetchall()
-        cur.execute("SELECT id, name, public_ip, private_ip, port FROM nodes")
-        node_map = {r[0]: Node(name=r[1], public_ip=r[2], private_ip=r[3], port=r[4]) for r in cur.fetchall()}
+        cur.execute("SELECT id, name, type, public_ip, private_ip, port FROM nodes")
+        node_map = {
+            r[0]: Node(
+                name=r[1],
+                type=r[2],
+                public_ip=r[3],
+                private_ip=r[4],
+                port=r[5]
+            )
+            for r in cur.fetchall()
+        }
+
 
         links = []
         for a_id, b_id in rows:

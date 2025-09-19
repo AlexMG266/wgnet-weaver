@@ -9,13 +9,14 @@ NODE_SCHEMA = {
     "type": "object",
     "properties": {
         "name": {"type": "string"},
+        "type": {"type": "string", "enum": ["server", "client", "router", "storage", "load_balancer", "firewall", "vpn_gateway"]},
         "public_ip": {"type": "string"},
         "port": {"type": "integer"},
         "allowed_ips": {"type": "array", "items": {"type": "string"}},
         "private_ip": {"type": "string"},
         "peers": {"type": "array", "items": {"type": "string"}}
     },
-    "required": ["name", "public_ip"],
+    "required": ["name", "public_ip", "type"],
     "additionalProperties": False
 }
 

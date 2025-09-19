@@ -1,6 +1,7 @@
 class Node:
-    def __init__(self, name, public_ip, private_ip=None, port=51820, allowed_ips=None, peers=None, id=None):
+    def __init__(self, name, type, public_ip, private_ip=None, port=51820, allowed_ips=None, peers=None, id=None):
         self._id = id
+        self._type = type
         self._name = name
         self._public_ip = public_ip
         self.ip = private_ip
@@ -15,6 +16,10 @@ class Node:
     @name.setter
     def name(self, value):
         self._name = value
+
+    @property
+    def type(self):
+        return self._type
 
     @property
     def public_ip(self):
