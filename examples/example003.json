@@ -1,0 +1,7 @@
+{
+  "nodes": [
+    { "name": "node1", "public_ip": "172.16.0.1", "port": 51820 },
+    { "name": "node2", "public_ip": "172.16.0.2" },
+    { "name": "node3", "public_ip": "172.16.0.3", "port": 51820 }
+  ]
+}
