@@ -1,8 +1,6 @@
-import uuid
-
 class Node:
-    def __init__(self, name, public_ip, private_ip=None, port=51820, allowed_ips=None, peers=None):
-        self._id = str(uuid.uuid4())
+    def __init__(self, name, public_ip, private_ip=None, port=51820, allowed_ips=None, peers=None, id=None):
+        self._id = id
         self._name = name
         self._public_ip = public_ip
         self.ip = private_ip
