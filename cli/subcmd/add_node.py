@@ -16,14 +16,4 @@ def add_generator_subparser(subparsers):
 
 # todo: implement add_node subcommand
 def run_add_node(args):
-    print("Add node functionality is not yet implemented.")
-    # Here you would implement the logic to add a new node to the existing configuration.
-    # This might involve reading the existing configuration, adding the new node,
-    # regenerating keys if necessary, and updating configuration files.
-    # For now, we just print the provided arguments.
-    print(f"Node Name: {args.name}")
-    print(f"Public IP: {args.public_ip}")
-    print(f"Private IP: {args.private_ip}")
-    print(f"Port: {args.port}")
-    print(f"Allowed IPs: {args.allowed_ips}")
-    print(f"Peers: {args.peers}")
+    pass
