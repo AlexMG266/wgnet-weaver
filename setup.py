@@ -10,7 +10,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "netweaver=cmd.netweaver:main"
+            "netweaver=cli.netweaver:main"
         ]
     },
 )

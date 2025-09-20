@@ -3,11 +3,11 @@
 # @author: alex-mosquera-gundin <alex.mosquera@udc.es>
 
 import argparse
-from cmd.subcmd import generate, add_node, remove_node, showgraph
+from cli.subcmd import generate, add_node, remove_node, showgraph
 from pkg.__version__ import __version__
 
 # usage:
-# python3 -m cmd.netweaver generate --input [nodes.yaml/json] --output ./configs (directory)
+# python3 -m cli.netweaver generate --input [nodes.yaml/json] --output ./configs (directory)
 
 def main():
     parser = argparse.ArgumentParser(
