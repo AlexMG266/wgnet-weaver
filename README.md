@@ -27,7 +27,7 @@ cd wgnet-weaver
 
 ````bash
 make install 
-python -m cli.netweaver --help
+python -m cli.wgnet --help
 make run ARGS="--help"  
 ````
 
