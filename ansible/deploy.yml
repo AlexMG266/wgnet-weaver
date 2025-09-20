@@ -1,0 +1,33 @@
+---
+- name: Deploy WireGuard configs and start interfaces
+  hosts: all
+  become: yes
+  vars:
+    config_dir: "/tmp/wgnet-configs"
+
+  tasks:
+    - name: Ensure WireGuard is installed
+      apt:
+        name: wireguard
+        state: present
+        update_cache: yes
+
+    - name: Copy wg0.conf to node
+      copy:
+        src: "{{ config_dir }}/{{ inventory_hostname }}/wg0.conf"
+        dest: /etc/wireguard/wg0.conf
+        owner: root
+        group: root
+        mode: '600'
+
+    - name: Bring up WireGuard interface wg0
+      command: wg-quick up wg0
+      args:
+        warn: false
+      ignore_errors: yes
+
+    - name: Enable wg0 to start at boot
+      systemd:
+        name: wg-quick@wg0
+        enabled: yes
+        state: started

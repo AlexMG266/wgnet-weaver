@@ -3,13 +3,22 @@ import json
 from pathlib import Path
 from pkg.node import Node
 from pkg.link import Link
-
-DB_FILE = Path.home() / '.wgnet-weaver.db'
+from pkg.paths import DB_FILE
 
 class VPNNetwork:
     def __init__(self, db_path=DB_FILE):
         self.conn = sqlite3.connect(db_path)
         self._create_tables()
+        self._config_path = None
+
+    @property
+    def config_path(self):
+        return self._config_path
+
+    @config_path.setter
+    def config_path(self, path):
+        self._config_path = Path(path)
+        self._config_path.mkdir(parents=True, exist_ok=True)
 
     def _create_tables(self):
         cur = self.conn.cursor()

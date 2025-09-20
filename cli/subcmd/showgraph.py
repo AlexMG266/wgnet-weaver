@@ -3,6 +3,9 @@ import sys
 import networkx as nx
 import matplotlib.pyplot as plt
 from pkg.db import VPNNetwork, Node, Link
+from pkg.logger import setup_logger
+
+logger = setup_logger(__name__)
 
 def add_showgraph_subparser(subparsers):
     parser = subparsers.add_parser(

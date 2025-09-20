@@ -1,6 +1,9 @@
 import os
 import sys
 from pkg.node import Node
+from pkg.logger import setup_logger
+
+logger = setup_logger(__name__)
 
 def add_generator_subparser(subparsers):
     parser = subparsers.add_parser('addnode', help='Add a new node to the existing configuration.')
