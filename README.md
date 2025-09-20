@@ -30,3 +30,9 @@ make install
 python -m cli.netweaver --help
 make run ARGS="--help"  
 ````
+
+3. Limpiar el proyecto
+```bash
+make clean      # Limpieza de cache python 
+make clean-all  # Limpieza total del proyecto 
+```
