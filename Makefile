@@ -17,7 +17,7 @@ test:
 	$(PYTHON) -m unittest discover -s tests
 
 run:
-	$(PYTHON) -m cli.netweaver $(ARGS)
+	$(PYTHON) -m cli.wgnet $(ARGS)
 
 # Limpieza de cachés de Python
 clean:
