@@ -19,15 +19,14 @@ CLI tool for automated WireGuard mesh network management. Generate, manage, and 
 1. Clonar el repositorio:
 
 ```bash
-git clone https://github.com/alex-mosquera-gundin/wgnet-weaver.git
+git clone https://github.com/AlexMG266/wgnet-weaver.git
 cd wgnet-weaver
 ```
 
 2. Instalar dependencias en el entorno y ejecutar el proyecto:
 
 ````bash
-make install  # Instala dependencias
-python -m netweaver --help
+make install 
+python -m cli.netweaver --help
 make run ARGS="--help"  
-make run ARGS="generate -i examples/example001.json -o ./configs
 ````
