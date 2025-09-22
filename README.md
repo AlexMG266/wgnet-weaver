@@ -1,5 +1,5 @@
 # wgnet-weaver
-CLI tool for automated WireGuard mesh network management. Generate, manage, and monitor secure VPN topologies for distributed teams.
+CLI tool for automated WireGuard mesh network management. Generate, manage, and monitor secure VPN topologies for distributed teams. This project depends on `wg-agent` package.
 
 [![Python Version](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
