@@ -3,7 +3,16 @@ VENV=venv
 PYTHON=$(VENV)/bin/python
 PIP=$(VENV)/bin/pip
 CONFIG_DIR=configs
-DB_FILE=~/.wgnet-weaver.db
+
+# Directorios en $HOME
+BASE_DIR=$(HOME)/.wgnet-weaver
+DB_FILE=$(BASE_DIR)/db.sqlite3
+CONFIGS_DIR=$(BASE_DIR)/configs
+INVENTORIES_DIR=$(BASE_DIR)/inventories
+PLAYBOOKS_DIR=$(BASE_DIR)/playbooks
+LOGS_DIR=$(BASE_DIR)/logs
+STATE_FILE=$(BASE_DIR)/state.json
+
 PYCACHE=$(shell find . -name "__pycache__")
 
 venv:
@@ -27,8 +36,8 @@ clean:
 clean-all: clean
 	@echo "[*] Removing generated configuration files..."
 	@rm -rf $(CONFIG_DIR)
-	@echo "[*] Removing database..."
-	@rm -f $(DB_FILE)
+	@echo "[*] Removing application data..."
+	@rm -rf $(BASE_DIR)
 	@echo "[*] Removing virtual environment..."
 	@rm -rf $(VENV)
 	@echo "[*] All cleaned!"

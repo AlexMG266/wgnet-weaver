@@ -2,6 +2,9 @@ import os
 import sys
 from pkg.config_generator import load_nodes, generate_keypair, assign_ips, generate_config_files
 from pkg.db import VPNNetwork
+from pkg.logger import setup_logger
+
+logger = setup_logger(__name__)
 
 def add_generate_subparser(subparsers):
     parser = subparsers.add_parser(
@@ -14,8 +17,9 @@ def add_generate_subparser(subparsers):
         help='Path to the YAML or JSON file containing node definitions.'
     )
     parser.add_argument(
-        '--output', '-o',
-        required=True,
+        '--config-dir', '-d',
+        required=False,
+        default='~/.wgnet-weaver/netconfigs',
         help='Directory where generated .conf files for each node will be saved.'
     )
     parser.add_argument(
@@ -34,6 +38,9 @@ def run_generate(args):
     nodes = load_nodes(args.input)
     assign_ips(nodes, args.subnet)
     vpn_net = VPNNetwork()
+    config_dir = os.path.expanduser(args.config_dir) # ~ -> /home/<user>
+    vpn_net.config_path = config_dir
+    os.makedirs(config_dir, exist_ok=True)
 
     # Persistir nodos
     for i, node in enumerate(nodes):
@@ -49,7 +56,7 @@ def run_generate(args):
             peer_node = next(n for n in nodes if n.name == peer_name)
             vpn_net.add_link(node.id, peer_node.id)
 
-    generate_config_files(nodes, args.output, args.subnet)
+    generate_config_files(nodes, vpn_net.config_path, args.subnet)
 
-    print(f"[+] Configuration files generated in {args.output}")
+    print(f"[+] Configuration files generated in {vpn_net.config_path}")
     print(f"[+] Nodes and links persisted in database: .wgnet-weaver.db")

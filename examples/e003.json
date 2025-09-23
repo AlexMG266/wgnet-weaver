@@ -1,0 +1,94 @@
+{
+  "nodes": [
+    {
+      "name": "node1",
+      "type": "server",
+      "public_ip": "192.168.1.1",
+      "private_ip": "10.0.0.1",
+      "port": 51820,
+      "allowed_ips": ["10.0.0.2", "10.0.0.3", "10.0.0.5"],
+      "peers": ["node2", "node3", "node5"]
+    },
+    {
+      "name": "node2",
+      "type": "client",
+      "public_ip": "192.168.1.2",
+      "private_ip": "10.0.0.2",
+      "port": 51821,
+      "allowed_ips": ["10.0.0.1", "10.0.0.4", "10.0.0.6"],
+      "peers": ["node1", "node4", "node6"]
+    },
+    {
+      "name": "node3",
+      "type": "router",
+      "public_ip": "192.168.1.3",
+      "private_ip": "10.0.0.3",
+      "port": 51822,
+      "allowed_ips": ["10.0.0.1", "10.0.0.5", "10.0.0.7"],
+      "peers": ["node1", "node5", "node7"]
+    },
+    {
+      "name": "node4",
+      "type": "firewall",
+      "public_ip": "192.168.1.4",
+      "private_ip": "10.0.0.4",
+      "port": 51823,
+      "allowed_ips": ["10.0.0.2", "10.0.0.8"],
+      "peers": ["node2", "node8"]
+    },
+    {
+      "name": "node5",
+      "type": "storage",
+      "public_ip": "192.168.1.5",
+      "private_ip": "10.0.0.5",
+      "port": 51824,
+      "allowed_ips": ["10.0.0.1", "10.0.0.3", "10.0.0.9"],
+      "peers": ["node1", "node3", "node9"]
+    },
+    {
+      "name": "node6",
+      "type": "vpn_gateway",
+      "public_ip": "192.168.1.6",
+      "private_ip": "10.0.0.6",
+      "port": 51825,
+      "allowed_ips": ["10.0.0.2", "10.0.0.7", "10.0.0.10"],
+      "peers": ["node2", "node7", "node10"]
+    },
+    {
+      "name": "node7",
+      "type": "load_balancer",
+      "public_ip": "192.168.1.7",
+      "private_ip": "10.0.0.7",
+      "port": 51826,
+      "allowed_ips": ["10.0.0.3", "10.0.0.6"],
+      "peers": ["node3", "node6"]
+    },
+    {
+      "name": "node8",
+      "type": "firewall",
+      "public_ip": "192.168.1.8",
+      "private_ip": "10.0.0.8",
+      "port": 51827,
+      "allowed_ips": ["10.0.0.4", "10.0.0.9"],
+      "peers": ["node4", "node9"]
+    },
+    {
+      "name": "node9",
+      "type": "server",
+      "public_ip": "192.168.1.9",
+      "private_ip": "10.0.0.9",
+      "port": 51828,
+      "allowed_ips": ["10.0.0.5", "10.0.0.8", "10.0.0.10"],
+      "peers": ["node5", "node8", "node10"]
+    },
+    {
+      "name": "node10",
+      "type": "client",
+      "public_ip": "192.168.1.10",
+      "private_ip": "10.0.0.10",
+      "port": 51829,
+      "allowed_ips": ["10.0.0.6", "10.0.0.9"],
+      "peers": ["node6", "node9"]
+    }
+  ]
+}
